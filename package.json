@@ -1,0 +1,44 @@
+{
+  "name": "@alvarosabu/core-pkg-test",
+  "version": "1.0.0",
+  "packageManager": "pnpm@10.6.1",
+  "description": "A TypeScript library featuring a functional singleton pattern with configuration options",
+  "author": "Alvaro Saburido <hola@alvarosaburido.dev> (https://github.com/alvarosabu/)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alvarosabu/core-pkg-test.git"
+  },
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rolldown -c rolldown.config.ts",
+    "dev": "rolldown -c rolldown.config.ts -w",
+    "lint": "oxlint .",
+    "format": "oxc format .",
+    "typecheck": "tsc --noEmit",
+    "clean": "rimraf dist",
+    "release": "release-it"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "typescript",
+    "library",
+    "singleton"
+  ],
+  "devDependencies": {
+    "@release-it/conventional-changelog": "^10.0.0",
+    "oxlint": "^0.16.4",
+    "release-it": "^18.1.2",
+    "rimraf": "^5.0.5",
+    "rolldown": "latest",
+    "typescript": "^5.3.3"
+  }
+}
