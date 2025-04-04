@@ -18,6 +18,11 @@ export interface CoreLibraryOptions {
    * Optional custom initialization logic
    */
   onInit?: () => Promise<void>;
+  /**
+   * Region for the library instance
+   * @default 'us-east-1'
+   */
+  region?: string;
 }
 
 /**
@@ -26,6 +31,7 @@ export interface CoreLibraryOptions {
 interface CoreLibraryState {
   initialized: boolean;
   options: CoreLibraryOptions;
+  region: string;
 }
 
 /**
@@ -49,6 +55,12 @@ export interface CoreLibrary {
    * @returns {CoreLibraryOptions}
    */
   getOptions: () => CoreLibraryOptions;
+  
+  /**
+   * Gets the current region.
+   * @returns {string}
+   */
+  getRegion: () => string;
 }
 
 /**
@@ -58,7 +70,8 @@ export interface CoreLibrary {
  */
 const createInstance = (options: CoreLibraryOptions): CoreLibraryState => ({
   initialized: false,
-  options
+  options,
+  region: options.region || 'us-east-1',
 });
 
 /**
@@ -72,6 +85,10 @@ export const coreLibrary = (options: CoreLibraryOptions = {}): CoreLibrary => {
   } else {
     // Update options if instance already exists
     instance.options = { ...instance.options, ...options };
+    // Update region if provided
+    if (options.region) {
+      instance.region = options.region;
+    }
   }
   
   return {
@@ -113,6 +130,14 @@ export const coreLibrary = (options: CoreLibraryOptions = {}): CoreLibrary => {
      */
     getOptions: (): CoreLibraryOptions => {
       return instance?.options ?? {};
+    },
+    
+    /**
+     * Gets the current region.
+     * @returns {string}
+     */
+    getRegion: (): string => {
+      return instance?.region ?? 'us-east-1';
     }
   };
 }; 
