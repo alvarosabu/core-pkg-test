@@ -30,7 +30,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: pnpm
-          registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies
         run: pnpm install
       - name: Build lib
@@ -39,4 +38,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm release --ci --dry-run
+        run: pnpm release --ci
